@@ -23,7 +23,7 @@ Write out the number as if it was a single number, the way it would be spoken in
 
 Enter a number: [41349038]  [Go]
 
-Result: fourty-one million three hundred forty-nine thousand thirty-eight
+Result: forty one million three hundred forty nine thousand thirty eight
 
 ## Extras
 
