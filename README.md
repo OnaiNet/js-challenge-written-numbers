@@ -16,3 +16,20 @@ Result: four one three four nine zero three eight
 1. Disallow non-numbers to be entered
 1. Display result as the user types
 
+# Difficult Version
+Write out the number as if it was a single number, the way it would be spoken in English.
+
+## Example
+
+Enter a number: [41349038]  [Go]
+
+Result: fourty-one million three hundred forty-nine thousand thirty-eight
+
+## Extras
+
+1. Allow decimal places
+  1. e.g. "438.33" = "four hundred thirty eight and 33/100"
+1. Add commas for clarity to the input
+  1. Do this as the user types
+  1. e.g. User types "4881939" => "4,881,939"
+  
