@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS-Challenge Written Numbers</title>
+</head>
+<body>
+	<label for="user-input">Enter a number: </label>
+	<input id="user-input" type="number" />
+	<div>Result:</div>
+	<div id="result"></div>
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var numbersToWords = {"0":"zero", "1":"one", "2":"two", "3":"three", "4":"four", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine"};
+
+		$('#user-input').on('keyup', function(e) {
+			var numbersOnly = $(this).val().replace(/[^0-9]/g, '');
+			$(this).val(numbersOnly);
+			var result = '';
+			
+			for (var x = 0; x < numbersOnly.length; x++) {
+				result += numbersToWords[numbersOnly[x]] + " ";
+			}
+
+			$('#result').html(result);
+		});	
+	</script>
+</body>
+</html>
