@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS-Challenge Written Numbers: Difficult Version</title>
+</head>
+<body>
+	<label for="user-input">Enter a number: </label>
+	<input id="user-input" type="text" />
+	<div>Result:</div>
+	<div id="result"></div>
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var numbersToWords = {"0":"zero", "1":"one", "2":"two", "3":"three", "4":"four", "5":"five", "6":"six", "7":"seven", "8":"eight", "9":"nine"};
+		var numbersToTens = {"0":"", "1":"", "2":"twenty", "3":"thirty", "4":"forty", "5":"fifty", "6":"sixty", "7":"seventy", "8":"eighty", "9":"ninety"};
+		var numberGroups = {"quadrillion":1000000000000000, "trillion":1000000000000, "billion":1000000000, "million":1000000, "thousand":1000};
+
+		var scrubInput = function() {
+			var numbersOnly = $('#user-input').val().replace(/[^0-9]/g, '');
+			numbersOnly = numbersOnly.split('').reverse().join('');
+			numbersOnly = numbersOnly.replace(/([0-9]{3})/g, '$1,').replace(/,$/, '');
+			numbersOnly = numbersOnly.split('').reverse().join('');
+			$('#user-input').val(numbersOnly);
+			return numbersOnly;
+		};
+
+		var describeHundreds = function(i) {
+			i = i.toString();
+			var result = '';
+
+			if (i.length > 3) {
+				throw 'Input must be no longer than 3 digits';
+			}
+
+			// zero-pad the triplet
+			var padding = '000';
+			i = (padding + i).slice(-padding.length);
+	
+			var hundreds = Number.parseInt(i[0]);
+
+			if (hundreds > 0) {
+				result += numbersToWords[i[0]] + ' hundred ';				
+			}
+			
+			var tens = Number.parseInt(i[1]);
+
+			if (tens > 1) {
+				result += numbersToTens[tens] + ' ';
+			} else if (tens == 1) {
+				result += numbersToWords[i.slice(-2)] + ' ';
+			} 
+
+			if ((tens == 0 || tens > 1) && i[2] !== '0') {
+				result += numbersToWords[i[2]] + ' ';
+			}
+
+			return result;
+		};
+
+		$('#user-input').on('keyup', function(e) {
+			var integerInput = Number.parseInt(scrubInput().replace(/[^0-9]/g, ''));
+			var result = '';
+			
+			for (var name in numberGroups) {
+				var groupValue = Math.floor(integerInput / numberGroups[name]);
+				if (groupValue > 0) {
+					result += describeHundreds(groupValue) + ' ' + name + ' ';
+					integerInput -= groupValue * numberGroups[name];
+				}
+			}
+
+			result += describeHundreds(integerInput);
+
+			$('#result').html(result);
+		});	
+	</script>
+</body>
+</html>
